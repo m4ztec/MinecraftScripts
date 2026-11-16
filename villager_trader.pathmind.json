@@ -1,0 +1,316 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "type": "START",
+      "x": 0,
+      "y": 0,
+      "parameters": []
+    },
+    {
+      "id": "approach_direction",
+      "type": "PARAM_DIRECTION",
+      "x": 220,
+      "y": 140,
+      "parameters": [
+        {
+          "name": "Mode",
+          "value": "exact",
+          "type": "STRING"
+        },
+        {
+          "name": "Yaw",
+          "value": "~0",
+          "type": "STRING"
+        },
+        {
+          "name": "Pitch",
+          "value": "~0",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "id": "approach_first",
+      "type": "WALK",
+      "x": 220,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "Duration",
+          "value": "30.0",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "Distance",
+          "value": "2.0",
+          "type": "DOUBLE"
+        }
+      ],
+      "mode": "WALK_FOR",
+      "parameterAttachments": [
+        {
+          "slotIndex": 0,
+          "parameterNodeId": "approach_direction"
+        }
+      ]
+    },
+    {
+      "id": "first_villager",
+      "type": "PARAM_ENTITY",
+      "x": 440,
+      "y": 140,
+      "parameters": [
+        {
+          "name": "Entity",
+          "value": "minecraft:villager",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "id": "interact_first",
+      "type": "INTERACT",
+      "x": 440,
+      "y": 0,
+      "parameters": [],
+      "parameterAttachments": [
+        {
+          "slotIndex": 0,
+          "parameterNodeId": "first_villager"
+        }
+      ]
+    },
+    {
+      "id": "wait_for_first_trade_screen",
+      "type": "WAIT",
+      "x": 660,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "Duration",
+          "value": "1.0",
+          "type": "DOUBLE"
+        }
+      ],
+      "mode": "WAIT_SECONDS"
+    },
+    {
+      "id": "trade_with_first_villager",
+      "type": "TRADE",
+      "x": 880,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "Number",
+          "value": "3",
+          "type": "INTEGER"
+        },
+        {
+          "name": "Count",
+          "value": "64",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    {
+      "id": "close_first_trade_screen",
+      "type": "CLOSE_GUI",
+      "x": 1100,
+      "y": 0,
+      "parameters": [],
+      "mode": "PLAYER_GUI_CLOSE"
+    },
+    {
+      "id": "left_direction",
+      "type": "PARAM_DIRECTION",
+      "x": 1320,
+      "y": 140,
+      "parameters": [
+        {
+          "name": "Mode",
+          "value": "exact",
+          "type": "STRING"
+        },
+        {
+          "name": "Yaw",
+          "value": "~-90",
+          "type": "STRING"
+        },
+        {
+          "name": "Pitch",
+          "value": "~0",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "id": "move_left_to_next",
+      "type": "WALK",
+      "x": 1320,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "Duration",
+          "value": "30.0",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "Distance",
+          "value": "2.0",
+          "type": "DOUBLE"
+        }
+      ],
+      "mode": "WALK_FOR",
+      "parameterAttachments": [
+        {
+          "slotIndex": 0,
+          "parameterNodeId": "left_direction"
+        }
+      ]
+    },
+    {
+      "id": "next_villager",
+      "type": "PARAM_ENTITY",
+      "x": 1540,
+      "y": 140,
+      "parameters": [
+        {
+          "name": "Entity",
+          "value": "minecraft:villager",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "id": "interact_next",
+      "type": "INTERACT",
+      "x": 1540,
+      "y": 0,
+      "parameters": [],
+      "parameterAttachments": [
+        {
+          "slotIndex": 0,
+          "parameterNodeId": "next_villager"
+        }
+      ]
+    },
+    {
+      "id": "wait_for_next_trade_screen",
+      "type": "WAIT",
+      "x": 1760,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "Duration",
+          "value": "1.0",
+          "type": "DOUBLE"
+        }
+      ],
+      "mode": "WAIT_SECONDS"
+    },
+    {
+      "id": "trade_with_next_villager",
+      "type": "TRADE",
+      "x": 1980,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "Number",
+          "value": "3",
+          "type": "INTEGER"
+        },
+        {
+          "name": "Count",
+          "value": "64",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    {
+      "id": "close_next_trade_screen",
+      "type": "CLOSE_GUI",
+      "x": 2200,
+      "y": 0,
+      "parameters": [],
+      "mode": "PLAYER_GUI_CLOSE"
+    },
+    {
+      "id": "stop",
+      "type": "STOP",
+      "x": 2420,
+      "y": 0,
+      "parameters": [],
+      "mode": "STOP_NORMAL"
+    }
+  ],
+  "connections": [
+    {
+      "outputNodeId": "start",
+      "inputNodeId": "approach_first",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "approach_first",
+      "inputNodeId": "interact_first",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "interact_first",
+      "inputNodeId": "wait_for_first_trade_screen",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "wait_for_first_trade_screen",
+      "inputNodeId": "trade_with_first_villager",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "trade_with_first_villager",
+      "inputNodeId": "close_first_trade_screen",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "close_first_trade_screen",
+      "inputNodeId": "move_left_to_next",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "move_left_to_next",
+      "inputNodeId": "interact_next",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "interact_next",
+      "inputNodeId": "wait_for_next_trade_screen",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "wait_for_next_trade_screen",
+      "inputNodeId": "trade_with_next_villager",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "trade_with_next_villager",
+      "inputNodeId": "close_next_trade_screen",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "close_next_trade_screen",
+      "inputNodeId": "stop",
+      "outputSocket": 0,
+      "inputSocket": 0
+    }
+  ],
+  "routines": []
+}

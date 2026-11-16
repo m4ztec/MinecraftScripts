@@ -1,0 +1,716 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pathmind-preset.schema.json",
+  "title": "Pathmind Preset",
+  "description": "Pathmind serializes presets as NodeGraphData JSON.",
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "description": "Nodes in this graph.",
+      "items": {
+        "$ref": "#/definitions/node"
+      }
+    },
+    "connections": {
+      "type": "array",
+      "description": "Flow connections between node sockets.",
+      "items": {
+        "$ref": "#/definitions/connection"
+      }
+    },
+    "routines": {
+      "type": "array",
+      "description": "Routine definitions owned by this preset.",
+      "items": {
+        "$ref": "#/definitions/routine"
+      }
+    },
+    "customNodeDefinition": {
+      "$ref": "#/definitions/customNodeDefinition",
+      "description": "Legacy metadata retained for old Template presets."
+    }
+  },
+  "definitions": {
+    "node": {
+      "type": "object",
+      "description": "A serialized Pathmind node. Node type and mode use their Java enum names.",
+      "required": [
+        "id",
+        "type",
+        "x",
+        "y"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique node id referenced by connections and attachments."
+        },
+        "type": {
+          "type": "string",
+          "description": "Stable NodeType id.",
+          "enum": [
+            "START",
+            "START_CHAIN",
+            "EVENT_FUNCTION",
+            "EVENT_CALL",
+            "ROUTINE_ENTRY",
+            "ROUTINE_CALL",
+            "VARIABLE",
+            "SET_VARIABLE",
+            "CALCULATE",
+            "CREATE_LIST",
+            "ADD_TO_LIST",
+            "REMOVE_FIRST_FROM_LIST",
+            "REMOVE_LAST_FROM_LIST",
+            "REMOVE_LIST_ITEM",
+            "REMOVE_FROM_LIST",
+            "LIST_ITEM",
+            "LIST_LENGTH",
+            "OPERATOR_EQUALS",
+            "OPERATOR_NOT",
+            "OPERATOR_BOOLEAN_NOT",
+            "OPERATOR_BOOLEAN_OR",
+            "OPERATOR_BOOLEAN_AND",
+            "OPERATOR_BOOLEAN_XOR",
+            "OPERATOR_GREATER",
+            "OPERATOR_LESS",
+            "OPERATOR_MOD",
+            "OPERATOR_RANDOM",
+            "GOTO",
+            "TRAVEL",
+            "GOAL",
+            "PATH",
+            "INVERT",
+            "COME",
+            "SURFACE",
+            "COLLECT",
+            "BUILD",
+            "TUNNEL",
+            "FARM",
+            "PLACE",
+            "CRAFT",
+            "EXPLORE",
+            "FOLLOW",
+            "CONTROL_REPEAT",
+            "CONTROL_REPEAT_UNTIL",
+            "CONTROL_WAIT_UNTIL",
+            "CONTROL_FOREVER",
+            "CONTROL_IF",
+            "CONTROL_IF_DO",
+            "CONTROL_IF_ELSE",
+            "CONTROL_FORK",
+            "CONTROL_JOIN_ANY",
+            "CONTROL_JOIN_ALL",
+            "LOOK",
+            "WALK",
+            "JUMP",
+            "PRESS_KEY",
+            "CRAWL",
+            "CROUCH",
+            "SPRINT",
+            "FLY",
+            "STOP",
+            "SWING",
+            "USE",
+            "INTERACT",
+            "BREAK",
+            "PLACE_HAND",
+            "TRADE",
+            "HOTBAR",
+            "DROP_ITEM",
+            "DROP_SLOT",
+            "CLICK_SLOT",
+            "CLICK_SCREEN",
+            "MOVE_ITEM",
+            "OPEN_INVENTORY",
+            "CLOSE_GUI",
+            "WRITE_BOOK",
+            "WRITE_SIGN",
+            "UI_UTILS",
+            "EQUIP_ARMOR",
+            "EQUIP_HAND",
+            "SENSOR_TOUCHING_BLOCK",
+            "SENSOR_TOUCHING_ENTITY",
+            "SENSOR_AT_COORDINATES",
+            "SENSOR_POSITION_OF",
+            "SENSOR_DISTANCE_BETWEEN",
+            "SENSOR_TARGETED_BLOCK",
+            "SENSOR_TARGETED_ENTITY",
+            "SENSOR_LOOK_DIRECTION",
+            "SENSOR_CURRENT_HAND",
+            "SENSOR_TARGETED_BLOCK_FACE",
+            "SENSOR_SLOT_FILLED",
+            "SENSOR_GUI_FILLED",
+            "SENSOR_CURRENT_GUI",
+            "SENSOR_IS_DAYTIME",
+            "SENSOR_IS_RAINING",
+            "SENSOR_HEALTH_BELOW",
+            "SENSOR_HUNGER_BELOW",
+            "SENSOR_ITEM_IN_INVENTORY",
+            "SENSOR_ITEM_IN_SLOT",
+            "SENSOR_SLOT_ITEM_COUNT",
+            "SENSOR_DURABILITY_OF",
+            "SENSOR_FIND_TRADE",
+            "SENSOR_VILLAGER_TRADE",
+            "SENSOR_IN_STOCK",
+            "SENSOR_IS_SWIMMING",
+            "SENSOR_IS_IN_LAVA",
+            "SENSOR_IS_UNDERWATER",
+            "SENSOR_IS_ON_GROUND",
+            "SENSOR_IS_FALLING",
+            "SENSOR_IS_RENDERED",
+            "SENSOR_IS_VISIBLE",
+            "SENSOR_KEY_PRESSED",
+            "SENSOR_CHAT_MESSAGE",
+            "SENSOR_JOINED_SERVER",
+            "SENSOR_FABRIC_EVENT",
+            "SENSOR_ATTRIBUTE_DETECTION",
+            "RUN_PRESET",
+            "WAIT",
+            "STICKY_NOTE",
+            "MESSAGE",
+            "TEMPLATE",
+            "STOP_CHAIN",
+            "STOP_ALL",
+            "PARAM_COORDINATE",
+            "PARAM_BLOCK",
+            "PARAM_ITEM",
+            "PARAM_ITEM_DATA",
+            "PARAM_VILLAGER_TRADE",
+            "PARAM_ENTITY",
+            "PARAM_PLAYER",
+            "PARAM_WAYPOINT",
+            "PARAM_SCHEMATIC",
+            "PARAM_INVENTORY_SLOT",
+            "PARAM_MESSAGE",
+            "PARAM_DURATION",
+            "PARAM_AMOUNT",
+            "PARAM_BOOLEAN",
+            "PARAM_HAND",
+            "PARAM_GUI",
+            "PARAM_KEY",
+            "PARAM_MOUSE_BUTTON",
+            "PARAM_RANGE",
+            "PARAM_DISTANCE",
+            "PARAM_DIRECTION",
+            "PARAM_BLOCK_FACE",
+            "PARAM_ROTATION",
+            "PARAM_PLACE_TARGET",
+            "PARAM_CLOSEST",
+            "ROUTINE_INPUT"
+          ]
+        },
+        "mode": {
+          "type": "string",
+          "description": "Optional mode for generalized node types.",
+          "enum": [
+            "CLICK_SLOT_LEFT",
+            "CLICK_SLOT_RIGHT",
+            "CLICK_SLOT_SHIFT",
+            "CLICK_SLOT_SWAP_OFFHAND",
+            "WALK_FOR",
+            "WALK_UNTIL",
+            "GOTO_XYZ",
+            "GOTO_XZ",
+            "GOTO_Y",
+            "GOTO_BLOCK",
+            "GOAL_XYZ",
+            "GOAL_XZ",
+            "GOAL_Y",
+            "GOAL_CURRENT",
+            "GOAL_CLEAR",
+            "COLLECT_SINGLE",
+            "COLLECT_MULTIPLE",
+            "BUILD_PLAYER",
+            "BUILD_XYZ",
+            "EXPLORE_CURRENT",
+            "EXPLORE_XYZ",
+            "EXPLORE_FILTER",
+            "FOLLOW_PLAYER",
+            "FOLLOW_PLAYERS",
+            "FOLLOW_ENTITIES",
+            "FOLLOW_ENTITY_TYPE",
+            "CRAFT_PLAYER_GUI",
+            "CRAFT_CRAFTING_TABLE",
+            "PLAYER_GUI_OPEN",
+            "PLAYER_GUI_CLOSE",
+            "UI_UTILS_CLOSE_WITHOUT_PACKET",
+            "UI_UTILS_CLOSE_SIGN_WITHOUT_PACKET",
+            "UI_UTILS_DESYNC",
+            "UI_UTILS_SET_SEND_PACKETS",
+            "UI_UTILS_SET_DELAY_PACKETS",
+            "UI_UTILS_ENABLE_DELAY_PACKETS",
+            "UI_UTILS_DISABLE_DELAY_PACKETS",
+            "UI_UTILS_FLUSH_DELAYED_PACKETS",
+            "UI_UTILS_SAVE_GUI",
+            "UI_UTILS_RESTORE_GUI",
+            "UI_UTILS_DISCONNECT",
+            "UI_UTILS_DISCONNECT_AND_SEND",
+            "UI_UTILS_COPY_TITLE_JSON",
+            "UI_UTILS_FABRICATE_CLICK_SLOT",
+            "UI_UTILS_FABRICATE_BUTTON_CLICK",
+            "UI_UTILS_SET_ENABLED",
+            "UI_UTILS_SET_BYPASS_RESOURCE_PACK",
+            "UI_UTILS_SET_FORCE_DENY_RESOURCE_PACK",
+            "FARM_RANGE",
+            "FARM_WAYPOINT",
+            "STOP_NORMAL",
+            "STOP_CANCEL",
+            "STOP_FORCE",
+            "WAIT_SECONDS",
+            "WAIT_TICKS",
+            "WAIT_MINUTES",
+            "WAIT_HOURS",
+            "SENSOR_POSITION_X",
+            "SENSOR_POSITION_Y",
+            "SENSOR_POSITION_Z",
+            "SENSOR_POSITION_XYZ",
+            "SENSOR_LOOK_YAW",
+            "SENSOR_LOOK_PITCH",
+            "SENSOR_LOOK_ROTATION"
+          ]
+        },
+        "x": {
+          "type": "integer",
+          "description": "Node canvas X coordinate."
+        },
+        "y": {
+          "type": "integer",
+          "description": "Node canvas Y coordinate."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Node parameters. Values are serialized as strings, including numbers and booleans.",
+          "items": {
+            "$ref": "#/definitions/parameter"
+          }
+        },
+        "attachedSensorId": {
+          "type": "string"
+        },
+        "parentControlId": {
+          "type": "string"
+        },
+        "attachedActionId": {
+          "type": "string"
+        },
+        "parentActionControlId": {
+          "type": "string"
+        },
+        "attachedParameterId": {
+          "type": "string"
+        },
+        "parentParameterHostId": {
+          "type": "string"
+        },
+        "parameterAttachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parameterAttachment"
+          }
+        },
+        "booleanToggleValue": {
+          "type": "boolean"
+        },
+        "parameterSlotCount": {
+          "type": "integer"
+        },
+        "startNodeNumber": {
+          "type": "integer"
+        },
+        "startLaunchMode": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "client_launch",
+            "world_join",
+            "main_menu_open",
+            "screen_opened"
+          ]
+        },
+        "startScreenTarget": {
+          "type": "string",
+          "enum": [
+            "any",
+            "main_menu",
+            "pause_menu",
+            "chat",
+            "inventory",
+            "merchant",
+            "visual_editor"
+          ]
+        },
+        "runtimeSourceNodeId": {
+          "type": "string"
+        },
+        "runtimeValueScope": {
+          "type": "string",
+          "enum": [
+            "CHAIN",
+            "GLOBAL"
+          ]
+        },
+        "routineId": {
+          "type": "string"
+        },
+        "routineInputId": {
+          "type": "string"
+        },
+        "routineArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/routineArgument"
+          }
+        },
+        "messageLines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messageClientSide": {
+          "type": "boolean"
+        },
+        "bookText": {
+          "type": "string"
+        },
+        "stickyNoteText": {
+          "type": "string"
+        },
+        "stickyNoteWidth": {
+          "type": "integer"
+        },
+        "stickyNoteHeight": {
+          "type": "integer"
+        },
+        "gotoAllowBreakWhileExecuting": {
+          "type": "boolean"
+        },
+        "gotoAllowPlaceWhileExecuting": {
+          "type": "boolean"
+        },
+        "keyPressedActivatesInGuis": {
+          "type": "boolean"
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "templateVersion": {
+          "type": "integer"
+        },
+        "templateGraph": {
+          "$ref": "#"
+        }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "description": "One named parameter value. The name suggestions include labels from the current node catalog.",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable parameter id; usually generated by Pathmind."
+        },
+        "name": {
+          "type": "string",
+          "enum": [
+            "Action",
+            "All",
+            "AllowBlockInteraction",
+            "AllowEntityInteraction",
+            "Amount",
+            "ArmorSlot",
+            "Attribute",
+            "Block",
+            "Blocks",
+            "Button",
+            "ButtonId",
+            "Count",
+            "Default",
+            "Delay",
+            "Direction",
+            "Distance",
+            "Duration",
+            "Enabled",
+            "EntireStack",
+            "Entity",
+            "Event",
+            "Face",
+            "FallbackToItemUse",
+            "Field",
+            "Filter",
+            "GUI",
+            "Hand",
+            "Inclusive",
+            "Index",
+            "IntervalSeconds",
+            "Item",
+            "Key",
+            "Label",
+            "List",
+            "Max",
+            "MaxBlocks",
+            "Min",
+            "Mode",
+            "MouseButton",
+            "Name",
+            "Number",
+            "Page",
+            "Pitch",
+            "PitchOffset",
+            "Player",
+            "PreferBlock",
+            "PreferEntity",
+            "Preset",
+            "Profession",
+            "Radius",
+            "Range",
+            "RepeatCount",
+            "RequireBlockHit",
+            "Required",
+            "Resource",
+            "RestoreSneakState",
+            "Revision",
+            "Rounding",
+            "Schematic",
+            "Seed",
+            "Slot",
+            "SneakWhileInteracting",
+            "SneakWhilePlacing",
+            "SneakWhileUsing",
+            "SourceSlot",
+            "StartNumber",
+            "State",
+            "StopIfUnavailable",
+            "SwingAfterUse",
+            "SwingOnPlace",
+            "SwingOnSuccess",
+            "SyncId",
+            "TargetSlot",
+            "Text",
+            "TimesToSend",
+            "Toggle",
+            "Type",
+            "UseAmount",
+            "UseBlockCap",
+            "UseDurationSeconds",
+            "UseIntervalSeconds",
+            "UseRadius",
+            "UseRounding",
+            "UseUntilEmpty",
+            "Value",
+            "Variable",
+            "Variant",
+            "Waypoint",
+            "X",
+            "Y",
+            "Yaw",
+            "YawOffset",
+            "Z"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Stored as text in NodeGraphData, even when the value represents a number or boolean."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "STRING",
+            "INTEGER",
+            "DOUBLE",
+            "BOOLEAN",
+            "COORDINATE",
+            "BLOCK_TYPE",
+            "PLAYER_NAME",
+            "ENTITY_TYPE",
+            "SCHEMATIC",
+            "WAYPOINT_TAG",
+            "WAYPOINT_NAME"
+          ]
+        },
+        "userEdited": {
+          "type": "boolean"
+        }
+      }
+    },
+    "connection": {
+      "type": "object",
+      "required": [
+        "outputNodeId",
+        "inputNodeId",
+        "outputSocket",
+        "inputSocket"
+      ],
+      "properties": {
+        "outputNodeId": {
+          "type": "string",
+          "description": "Id of the source node."
+        },
+        "inputNodeId": {
+          "type": "string",
+          "description": "Id of the destination node."
+        },
+        "outputSocket": {
+          "type": "integer"
+        },
+        "inputSocket": {
+          "type": "integer"
+        }
+      }
+    },
+    "parameterAttachment": {
+      "type": "object",
+      "required": [
+        "slotIndex",
+        "parameterNodeId"
+      ],
+      "properties": {
+        "slotIndex": {
+          "type": "integer"
+        },
+        "parameterNodeId": {
+          "type": "string"
+        },
+        "routineInputId": {
+          "type": "string"
+        }
+      }
+    },
+    "routineArgument": {
+      "type": "object",
+      "properties": {
+        "inputId": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "valueKind": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "orphaned": {
+          "type": "boolean"
+        }
+      }
+    },
+    "routine": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "interfaceVersion": {
+          "type": "integer"
+        },
+        "implementationRevision": {
+          "type": "integer"
+        },
+        "interfaceSignature": {
+          "type": "string"
+        },
+        "implementationSignature": {
+          "type": "string"
+        },
+        "libraryRoutineId": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/routineInput"
+          }
+        },
+        "graph": {
+          "$ref": "#"
+        }
+      }
+    },
+    "routineInput": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "valueKind": {
+          "type": "string"
+        },
+        "acceptedTraits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "customNodeDefinition": {
+      "type": "object",
+      "properties": {
+        "presetName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/customNodePort"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/customNodePort"
+          }
+        }
+      }
+    },
+    "customNodePort": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "defaultValue": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

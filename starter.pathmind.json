@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "type": "START",
+      "x": 0,
+      "y": 0,
+      "parameters": []
+    },
+    {
+      "id": "stop",
+      "type": "STOP",
+      "mode": "STOP_NORMAL",
+      "x": 220,
+      "y": 0,
+      "parameters": []
+    }
+  ],
+  "connections": [
+    {
+      "outputNodeId": "start",
+      "inputNodeId": "stop",
+      "outputSocket": 0,
+      "inputSocket": 0
+    }
+  ],
+  "routines": []
+}

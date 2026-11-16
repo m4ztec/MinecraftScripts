@@ -1,0 +1,20 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "*.pathmind.json",
+                "**/pathmind/presets/*.json"
+            ],
+            "url": "./pathmind-preset.schema.json"
+        }
+    ],
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.typeCheckingMode": "basic",
+    "python-envs.pythonProjects": [
+        {
+            "path": ".venv",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "type": "START",
+      "x": 0,
+      "y": 0,
+      "parameters": []
+    },
+    {
+      "id": "move_left_1",
+      "type": "GOTO",
+      "x": 220,
+      "y": 0,
+      "parameters": [
+        {
+          "name": "X",
+          "value": "-1",
+          "type": "INTEGER"
+        },
+        {
+          "name": "Y",
+          "value": "64",
+          "type": "INTEGER"
+        },
+        {
+          "name": "Z",
+          "value": "0",
+          "type": "INTEGER"
+        }
+      ],
+      "mode": "GOTO_XYZ"
+    },
+    {
+      "id": "stop",
+      "type": "STOP",
+      "x": 440,
+      "y": 0,
+      "parameters": [],
+      "mode": "STOP_NORMAL"
+    }
+  ],
+  "connections": [
+    {
+      "outputNodeId": "start",
+      "inputNodeId": "move_left_1",
+      "outputSocket": 0,
+      "inputSocket": 0
+    },
+    {
+      "outputNodeId": "move_left_1",
+      "inputNodeId": "stop",
+      "outputSocket": 0,
+      "inputSocket": 0
+    }
+  ],
+  "routines": []
+}
