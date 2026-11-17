@@ -40,7 +40,7 @@ class PresetBuilderTests(unittest.TestCase):
         return preset
 
     def test_builder_matches_current_test_preset(self) -> None:
-        expected = json.loads((ROOT / "test.pathmind.json").read_text(encoding="utf-8"))
+        expected = json.loads((ROOT / "presets" / "test.pathmind.json").read_text(encoding="utf-8"))
         self.assertEqual(self.build_test_graph().to_dict(), expected)
 
     def test_generic_node_builder_sets_goto_mode_and_parameter_types(self) -> None:
@@ -124,7 +124,7 @@ class PresetBuilderTests(unittest.TestCase):
             Preset.from_dict(data)
 
     def test_from_json_validates_and_preserves_existing_preset(self) -> None:
-        source = (ROOT / "test.pathmind.json").read_text(encoding="utf-8")
+        source = (ROOT / "presets" / "test.pathmind.json").read_text(encoding="utf-8")
         loaded = Preset.from_json(source)
         self.assertEqual(loaded.to_dict(), json.loads(source))
 

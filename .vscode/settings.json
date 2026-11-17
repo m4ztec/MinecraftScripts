@@ -2,10 +2,9 @@
     "json.schemas": [
         {
             "fileMatch": [
-                "*.pathmind.json",
-                "**/pathmind/presets/*.json"
+                "pathmind/presets/*.pathmind.json"
             ],
-            "url": "./pathmind-preset.schema.json"
+            "url": "./pathmind/pathmind-preset.schema.json"
         }
     ],
     "python.analysis.diagnosticMode": "workspace",

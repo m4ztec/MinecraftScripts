@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pathmind_presets import (
     NodeMode,
     NodeType,
@@ -158,4 +160,4 @@ for current, following in (
 ):
     preset.connect(current, following)
 
-preset.write("villager_trader.pathmind.json")
+preset.write(Path(__file__).resolve().parents[1] / "presets" / "villager_trader.pathmind.json")
